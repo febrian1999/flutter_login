@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "93994287670",
+    "project_id": "febrian-flutter-login",
+    "storage_bucket": "febrian-flutter-login.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93994287670:android:8bf3b08862b0bc68e1ce97",
+        "android_client_info": {
+          "package_name": "febrian.flutter_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "93994287670-7g6ojrae3vv6h8d17m9fvr6gta69335c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNtv1c9yfOVZC7m-gDnJvBBCFYfs-gVvc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "93994287670-7g6ojrae3vv6h8d17m9fvr6gta69335c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
