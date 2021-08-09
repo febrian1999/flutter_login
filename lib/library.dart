@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login/register.dart';
 
 import 'home.dart';
 import 'login.dart';
@@ -27,16 +28,16 @@ goToLoginPage(context) {
   );
 }
 
-// goToRegisterPage(context) {
-//   Navigator.pushReplacement(
-//     context,
-//     MaterialPageRoute(
-//       builder: (context) => Register(
-//         title: 'Register',
-//       ),
-//     ),
-//   );
-// }
+goToRegisterPage(context) {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (context) => Register(
+        title: 'Register',
+      ),
+    ),
+  );
+}
 
 md5Hash(string) {
   String hash = md5.convert(utf8.encode(string)).toString();
