@@ -102,6 +102,9 @@ class _LoginState extends State<Login> {
                             color: Colors.white70,
                           ),
                         ),
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     Container(
@@ -119,6 +122,7 @@ class _LoginState extends State<Login> {
                       height: 56,
                       child: TextFormField(
                         controller: controllerPass,
+                        obscureText: true,
                         decoration: InputDecoration(
                           hintText: "Password",
                           hintStyle: TextStyle(color: Colors.white54),
@@ -134,6 +138,9 @@ class _LoginState extends State<Login> {
                             Icons.vpn_key_outlined,
                             color: Colors.white70,
                           ),
+                        ),
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
                       ),
                     ),

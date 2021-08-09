@@ -54,7 +54,7 @@ class _RegisterState extends State<Register> {
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
         print("Username already taken");
-      }
+      } else {}
     });
   }
 
@@ -158,6 +158,7 @@ class _RegisterState extends State<Register> {
                       height: 56,
                       child: TextFormField(
                         controller: controllerPass,
+                        obscureText: true,
                         decoration: InputDecoration(
                           hintText: "Password",
                           hintStyle: TextStyle(color: Colors.white54),
@@ -173,6 +174,9 @@ class _RegisterState extends State<Register> {
                             Icons.vpn_key_outlined,
                             color: Colors.white70,
                           ),
+                        ),
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -191,6 +195,7 @@ class _RegisterState extends State<Register> {
                       height: 56,
                       child: TextFormField(
                         controller: controllerPas2,
+                        obscureText: true,
                         decoration: InputDecoration(
                           hintText: "Password",
                           hintStyle: TextStyle(color: Colors.white54),
@@ -206,6 +211,9 @@ class _RegisterState extends State<Register> {
                             Icons.vpn_key_outlined,
                             color: Colors.white70,
                           ),
+                        ),
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
                       ),
                     ),
