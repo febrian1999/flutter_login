@@ -17,13 +17,11 @@ class _LoginState extends State<Login> {
   TextEditingController controllerPass = TextEditingController();
 
   loginOnPressed() {
-    Firebase.initializeApp();
+    final firestoreInstance = FirebaseFirestore.instance;
 
     String username = controllerUser.text;
     String password = controllerPass.text;
     String hashpass;
-
-    final firestoreInstance = FirebaseFirestore.instance;
 
     firestoreInstance.collection('users').doc(username).get().then(
       (value) {
