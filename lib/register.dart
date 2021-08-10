@@ -74,7 +74,7 @@ class _RegisterState extends State<Register> {
     if (pass1 == pass2) {
       return null;
     } else {
-      return "Password did't match";
+      return "Password didn't match";
     }
   }
 
