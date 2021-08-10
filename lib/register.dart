@@ -13,31 +13,33 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final formGlobalKey = GlobalKey<FormState>();
+
   TextEditingController controllerUser = TextEditingController();
   TextEditingController controllerPass = TextEditingController();
   TextEditingController controllerPas2 = TextEditingController();
 
   registerOnPressed() {
-    Firebase.initializeApp();
+    if (formGlobalKey.currentState!.validate()) {
+      String username = controllerUser.text;
+      String password = controllerPass.text;
 
-    String username = controllerUser.text;
-    String password = controllerPass.text;
+      final firestoreInstance = FirebaseFirestore.instance;
 
-    final firestoreInstance = FirebaseFirestore.instance;
+      firestoreInstance
+          .collection("users")
+          .doc(username)
+          .set(
+            {
+              "username": username,
+              "password": md5Hash(password),
+            },
+          )
+          .then((value) => print("Register Success"))
+          .catchError((error) => print("Register Failed"));
 
-    firestoreInstance
-        .collection("users")
-        .doc(username)
-        .set(
-          {
-            "username": username,
-            "password": md5Hash(password),
-          },
-        )
-        .then((value) => print("Register Success"))
-        .catchError((error) => print("Register Failed"));
-
-    goToLoginPage(context);
+      goToLoginPage(context);
+    }
   }
 
   usernameOnChanged(text) {
@@ -63,6 +65,17 @@ class _RegisterState extends State<Register> {
       return "Username is empty";
     }
     return null;
+  }
+
+  passwordValidator(value) {
+    String pass1 = controllerPass.text;
+    String pass2 = controllerPas2.text;
+
+    if (pass1 == pass2) {
+      return null;
+    } else {
+      return "Password did't match";
+    }
   }
 
   loginOnPressed() {
@@ -215,6 +228,9 @@ class _RegisterState extends State<Register> {
                         style: TextStyle(
                           color: Colors.white,
                         ),
+                        validator: (value) {
+                          passwordValidator(value);
+                        },
                       ),
                     ),
                     Container(
