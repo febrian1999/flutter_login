@@ -20,28 +20,60 @@ class _RegisterState extends State<Register> {
   TextEditingController controllerPass2 = TextEditingController();
 
   registerOnPressed() {
-    String username = controllerUser.text;
-    String password = controllerPass1.text;
-    if (username != "" && password != "") {
-      if (formGlobalKey.currentState!.validate()) {
-        final firestoreInstance = FirebaseFirestore.instance;
+    String user = controllerUser.text;
+    String pass1 = controllerPass1.text;
+    String pass2 = controllerPass2.text;
 
-        firestoreInstance
-            .collection("users")
-            .doc(username)
-            .set(
-              {
-                "username": username,
-                "password": md5Hash(password),
-              },
-            )
-            .then((value) => print("Register Success"))
-            .catchError((error) => print("Register Failed"));
+    // if (pass1 == pass2) {8
+    if (formGlobalKey.currentState!.validate()) {
+      formGlobalKey.currentState!.save();
 
-        goToLoginPage(context);
-      }
+      final firestoreInstance = FirebaseFirestore.instance;
+
+      firestoreInstance
+          .collection("users")
+          .doc(user)
+          .set(
+            {
+              "username": user,
+              "password": md5Hash(pass1),
+            },
+          )
+          .then((value) => print("Register Success"))
+          .catchError((error) => print("Register Failed"));
+
+      goToLoginPage(context);
+      // }
     }
   }
+  // registerOnPressed() {
+  //   String username = controllerUser.text;
+  //   String pass1 = controllerPass1.text;
+  //   String pass2 = controllerPass2.text;
+
+  //   if (username != "" && pass1 != "" && pass2 != "") {
+  //     if (formGlobalKey.currentState!.validate()) {
+  //       formGlobalKey.currentState.save();
+  //       if (pass1 == pass2) {
+  //         final firestoreInstance = FirebaseFirestore.instance;
+
+  //         firestoreInstance
+  //             .collection("users")
+  //             .doc(username)
+  //             .set(
+  //               {
+  //                 "username": username,
+  //                 "password": md5Hash(pass1),
+  //               },
+  //             )
+  //             .then((value) => print("Register Success"))
+  //             .catchError((error) => print("Register Failed"));
+
+  //         goToLoginPage(context);
+  //       }
+  //     }
+  //   }
+  // }
 
   usernameOnChanged(text) {
     Firebase.initializeApp();
