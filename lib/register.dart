@@ -16,29 +16,30 @@ class _RegisterState extends State<Register> {
   final formGlobalKey = GlobalKey<FormState>();
 
   TextEditingController controllerUser = TextEditingController();
-  TextEditingController controllerPass = TextEditingController();
-  TextEditingController controllerPas2 = TextEditingController();
+  TextEditingController controllerPass1 = TextEditingController();
+  TextEditingController controllerPass2 = TextEditingController();
 
   registerOnPressed() {
-    if (formGlobalKey.currentState!.validate()) {
-      String username = controllerUser.text;
-      String password = controllerPass.text;
+    String username = controllerUser.text;
+    String password = controllerPass1.text;
+    if (username != "" && password != "") {
+      if (formGlobalKey.currentState!.validate()) {
+        final firestoreInstance = FirebaseFirestore.instance;
 
-      final firestoreInstance = FirebaseFirestore.instance;
+        firestoreInstance
+            .collection("users")
+            .doc(username)
+            .set(
+              {
+                "username": username,
+                "password": md5Hash(password),
+              },
+            )
+            .then((value) => print("Register Success"))
+            .catchError((error) => print("Register Failed"));
 
-      firestoreInstance
-          .collection("users")
-          .doc(username)
-          .set(
-            {
-              "username": username,
-              "password": md5Hash(password),
-            },
-          )
-          .then((value) => print("Register Success"))
-          .catchError((error) => print("Register Failed"));
-
-      goToLoginPage(context);
+        goToLoginPage(context);
+      }
     }
   }
 
@@ -60,18 +61,17 @@ class _RegisterState extends State<Register> {
     });
   }
 
-  usernameValidator(value) {
-    if (value == null || value.isEmpty) {
+  usernameValidator(user) {
+    if (user == null || user.isEmpty) {
       return "Username is empty";
     }
     return null;
   }
 
-  passwordValidator(value) {
-    String pass1 = controllerPass.text;
-    String pass2 = controllerPas2.text;
+  passwordValidator(pass) {
+    String pass1 = controllerPass1.text;
 
-    if (pass1 == pass2) {
+    if (pass1 == pass) {
       return null;
     } else {
       return "Password didn't match";
@@ -114,145 +114,152 @@ class _RegisterState extends State<Register> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(40, 8, 16, 0),
-                      child: Text(
-                        "Username",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                      height: 56,
-                      child: TextFormField(
-                        controller: controllerUser,
-                        decoration: InputDecoration(
-                          hintText: "Username",
-                          hintStyle: TextStyle(color: Colors.white54),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(32),
-                            borderSide: BorderSide(color: Colors.white70),
+                    Form(
+                      key: formGlobalKey,
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.fromLTRB(40, 8, 16, 0),
+                            child: Text(
+                              "Username",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(32),
-                            borderSide: BorderSide(color: Colors.white70),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                            height: 56,
+                            child: TextFormField(
+                              controller: controllerUser,
+                              decoration: InputDecoration(
+                                hintText: "Username",
+                                hintStyle: TextStyle(color: Colors.white54),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(32),
+                                  borderSide: BorderSide(color: Colors.white70),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(32),
+                                  borderSide: BorderSide(color: Colors.white70),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.person_outlined,
+                                  color: Colors.white70,
+                                ),
+                              ),
+                              onChanged: (text) {
+                                usernameOnChanged(text);
+                              },
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                              validator: (value) {
+                                usernameValidator(value);
+                              },
+                            ),
                           ),
-                          prefixIcon: Icon(
-                            Icons.person_outlined,
-                            color: Colors.white70,
+                          Container(
+                            padding: EdgeInsets.fromLTRB(40, 8, 16, 0),
+                            child: Text(
+                              "Password",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
-                        onChanged: (text) {
-                          usernameOnChanged(text);
-                        },
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                        validator: (value) {
-                          usernameValidator(value);
-                        },
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(40, 8, 16, 0),
-                      child: Text(
-                        "Password",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                      height: 56,
-                      child: TextFormField(
-                        controller: controllerPass,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          hintText: "Password",
-                          hintStyle: TextStyle(color: Colors.white54),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(32),
-                            borderSide: BorderSide(color: Colors.white70),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                            height: 56,
+                            child: TextFormField(
+                              controller: controllerPass1,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                hintText: "Password",
+                                hintStyle: TextStyle(color: Colors.white54),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(32),
+                                  borderSide: BorderSide(color: Colors.white70),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(32),
+                                  borderSide: BorderSide(color: Colors.white70),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.vpn_key_outlined,
+                                  color: Colors.white70,
+                                ),
+                              ),
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(32),
-                            borderSide: BorderSide(color: Colors.white70),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(40, 8, 16, 0),
+                            child: Text(
+                              "Re Enter Password",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                          prefixIcon: Icon(
-                            Icons.vpn_key_outlined,
-                            color: Colors.white70,
+                          Container(
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                            height: 56,
+                            child: TextFormField(
+                              controller: controllerPass2,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                hintText: "Password",
+                                hintStyle: TextStyle(color: Colors.white54),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(32),
+                                  borderSide: BorderSide(color: Colors.white70),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(32),
+                                  borderSide: BorderSide(color: Colors.white70),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.vpn_key_outlined,
+                                  color: Colors.white70,
+                                ),
+                              ),
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                              validator: (value) {
+                                passwordValidator(value);
+                              },
+                            ),
                           ),
-                        ),
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(40, 8, 16, 0),
-                      child: Text(
-                        "Re Enter Password",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                      height: 56,
-                      child: TextFormField(
-                        controller: controllerPas2,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          hintText: "Password",
-                          hintStyle: TextStyle(color: Colors.white54),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(32),
-                            borderSide: BorderSide(color: Colors.white70),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                registerOnPressed();
+                              },
+                              child: Text(
+                                "Register",
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                minimumSize: Size.fromHeight(48),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                              ),
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(32),
-                            borderSide: BorderSide(color: Colors.white70),
-                          ),
-                          prefixIcon: Icon(
-                            Icons.vpn_key_outlined,
-                            color: Colors.white70,
-                          ),
-                        ),
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                        validator: (value) {
-                          passwordValidator(value);
-                        },
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          registerOnPressed();
-                        },
-                        child: Text(
-                          "Register",
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 18,
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          minimumSize: Size.fromHeight(48),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                        ),
+                        ],
                       ),
                     ),
                   ],
