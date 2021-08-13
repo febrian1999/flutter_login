@@ -232,7 +232,7 @@ class _RegisterState extends State<Register> {
                           Container(
                             padding: EdgeInsets.fromLTRB(40, 8, 16, 0),
                             child: Text(
-                              "Re Enter Password",
+                              "Re Type Password",
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.white,
@@ -265,7 +265,9 @@ class _RegisterState extends State<Register> {
                                 color: Colors.white,
                               ),
                               validator: (value) {
-                                passwordValidator(value);
+                                String pass1 = controllerPass1.text;
+                                String pass2 = controllerPass2.text;
+                                if (pass1 != pass2) {}
                               },
                             ),
                           ),
