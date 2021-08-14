@@ -24,7 +24,6 @@ class _RegisterState extends State<Register> {
     String pass1 = controllerPass1.text;
     String pass2 = controllerPass2.text;
 
-    // if (pass1 == pass2) {8
     if (formGlobalKey.currentState!.validate()) {
       formGlobalKey.currentState!.save();
 
@@ -43,9 +42,9 @@ class _RegisterState extends State<Register> {
           .catchError((error) => print("Register Failed"));
 
       goToLoginPage(context);
-      // }
     }
   }
+
   // registerOnPressed() {
   //   String username = controllerUser.text;
   //   String pass1 = controllerPass1.text;
