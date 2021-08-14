@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/library.dart';
 
@@ -22,7 +21,6 @@ class _RegisterState extends State<Register> {
   registerOnPressed() {
     String user = controllerUser.text;
     String pass1 = controllerPass1.text;
-    String pass2 = controllerPass2.text;
 
     if (formGlobalKey.currentState!.validate()) {
       formGlobalKey.currentState!.save();
@@ -45,38 +43,7 @@ class _RegisterState extends State<Register> {
     }
   }
 
-  // registerOnPressed() {
-  //   String username = controllerUser.text;
-  //   String pass1 = controllerPass1.text;
-  //   String pass2 = controllerPass2.text;
-
-  //   if (username != "" && pass1 != "" && pass2 != "") {
-  //     if (formGlobalKey.currentState!.validate()) {
-  //       formGlobalKey.currentState.save();
-  //       if (pass1 == pass2) {
-  //         final firestoreInstance = FirebaseFirestore.instance;
-
-  //         firestoreInstance
-  //             .collection("users")
-  //             .doc(username)
-  //             .set(
-  //               {
-  //                 "username": username,
-  //                 "password": md5Hash(pass1),
-  //               },
-  //             )
-  //             .then((value) => print("Register Success"))
-  //             .catchError((error) => print("Register Failed"));
-
-  //         goToLoginPage(context);
-  //       }
-  //     }
-  //   }
-  // }
-
   usernameOnChanged(text) {
-    Firebase.initializeApp();
-
     String username = controllerUser.text;
 
     final firestoreInstance = FirebaseFirestore.instance;
@@ -186,8 +153,18 @@ class _RegisterState extends State<Register> {
                               style: TextStyle(
                                 color: Colors.white,
                               ),
-                              validator: (value) {
-                                usernameValidator(value);
+                              validator: (username) {
+                                var usernameCheck;
+                                FirebaseFirestore.instance
+                                    .collection("users")
+                                    .get()
+                                    .then((querySnapshot) {
+                                  querySnapshot.docs.forEach((result) {
+                                    print(result.data());
+                                    usernameCheck = result.data();
+                                  });
+                                });
+                                print("username " + usernameCheck);
                               },
                             ),
                           ),
