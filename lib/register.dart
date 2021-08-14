@@ -266,7 +266,10 @@ class _RegisterState extends State<Register> {
                               validator: (value) {
                                 String pass1 = controllerPass1.text;
                                 String pass2 = controllerPass2.text;
-                                if (pass1 != pass2) {}
+                                if (pass1 != pass2) {
+                                  return "Password doesn't match";
+                                }
+                                return null;
                               },
                             ),
                           ),
