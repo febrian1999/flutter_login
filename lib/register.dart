@@ -59,13 +59,6 @@ class _RegisterState extends State<Register> {
     });
   }
 
-  usernameValidator(user) {
-    if (user == null || user.isEmpty) {
-      return "Username is empty";
-    }
-    return null;
-  }
-
   passwordValidator(pass) {
     String pass1 = controllerPass1.text;
 
@@ -154,17 +147,10 @@ class _RegisterState extends State<Register> {
                                 color: Colors.white,
                               ),
                               validator: (username) {
-                                var usernameCheck;
-                                FirebaseFirestore.instance
-                                    .collection("users")
-                                    .get()
-                                    .then((querySnapshot) {
-                                  querySnapshot.docs.forEach((result) {
-                                    print(result.data());
-                                    usernameCheck = result.data();
-                                  });
-                                });
-                                print("username " + usernameCheck);
+                                if (username == null || username.isEmpty) {
+                                  return "Username is empty";
+                                }
+                                return null;
                               },
                             ),
                           ),
