@@ -14,6 +14,8 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final formGlobalKey = GlobalKey<FormState>();
 
+  var getUsername;
+
   TextEditingController controllerUser = TextEditingController();
   TextEditingController controllerPass1 = TextEditingController();
   TextEditingController controllerPass2 = TextEditingController();
@@ -150,7 +152,7 @@ class _RegisterState extends State<Register> {
                                 final firestoreInstance =
                                     FirebaseFirestore.instance;
 
-                                String getUsername;
+                                // var getUsername;
 
                                 firestoreInstance
                                     .collection('users')
@@ -158,16 +160,14 @@ class _RegisterState extends State<Register> {
                                     .get()
                                     .then(
                                   (value) {
-                                    getUsername = value.data()?['password'];
-                                    if (getUsername == username) {
-                                      return "Username already taken";
-                                    }
-                                    return null;
+                                    getUsername = value.data()?['username'];
                                   },
                                 );
 
                                 if (username == null || username.isEmpty) {
                                   return "Username is empty";
+                                } else if (getUsername == username) {
+                                  return "Username already taken";
                                 }
                                 return null;
                               },
