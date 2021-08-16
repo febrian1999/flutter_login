@@ -147,6 +147,25 @@ class _RegisterState extends State<Register> {
                                 color: Colors.white,
                               ),
                               validator: (username) {
+                                final firestoreInstance =
+                                    FirebaseFirestore.instance;
+
+                                String getUsername;
+
+                                firestoreInstance
+                                    .collection('users')
+                                    .doc(username)
+                                    .get()
+                                    .then(
+                                  (value) {
+                                    getUsername = value.data()?['password'];
+                                    if (getUsername == username) {
+                                      return "Username already taken";
+                                    }
+                                    return null;
+                                  },
+                                );
+
                                 if (username == null || username.isEmpty) {
                                   return "Username is empty";
                                 }
