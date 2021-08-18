@@ -137,6 +137,12 @@ class _RegisterState extends State<Register> {
                                   borderRadius: BorderRadius.circular(32),
                                   borderSide: BorderSide(color: Colors.white70),
                                 ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(32),
+                                  borderSide: BorderSide(
+                                    color: Colors.redAccent,
+                                  ),
+                                ),
                                 prefixIcon: Icon(
                                   Icons.person_outlined,
                                   color: Colors.white70,
@@ -151,8 +157,6 @@ class _RegisterState extends State<Register> {
                               validator: (username) {
                                 final firestoreInstance =
                                     FirebaseFirestore.instance;
-
-                                // var getUsername;
 
                                 firestoreInstance
                                     .collection('users')
@@ -236,6 +240,12 @@ class _RegisterState extends State<Register> {
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(32),
                                   borderSide: BorderSide(color: Colors.white70),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(32),
+                                  borderSide: BorderSide(
+                                    color: Colors.redAccent,
+                                  ),
                                 ),
                                 prefixIcon: Icon(
                                   Icons.vpn_key_outlined,
