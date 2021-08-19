@@ -191,28 +191,37 @@ class _RegisterState extends State<Register> {
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             height: 56,
                             child: TextFormField(
-                              controller: controllerPass1,
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                hintText: "Password",
-                                hintStyle: TextStyle(color: Colors.white54),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(32),
-                                  borderSide: BorderSide(color: Colors.white70),
+                                controller: controllerPass1,
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  hintText: "Password",
+                                  hintStyle: TextStyle(color: Colors.white54),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(32),
+                                    borderSide:
+                                        BorderSide(color: Colors.white70),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(32),
+                                    borderSide:
+                                        BorderSide(color: Colors.white70),
+                                  ),
+                                  prefixIcon: Icon(
+                                    Icons.vpn_key_outlined,
+                                    color: Colors.white70,
+                                  ),
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(32),
-                                  borderSide: BorderSide(color: Colors.white70),
+                                style: TextStyle(
+                                  color: Colors.white,
                                 ),
-                                prefixIcon: Icon(
-                                  Icons.vpn_key_outlined,
-                                  color: Colors.white70,
-                                ),
-                              ),
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
+                                validator: (password) {
+                                  if (password!.isEmpty) {
+                                    return "Password is empty";
+                                  } else if (password.length <= 8) {
+                                    return "Password is too short";
+                                  }
+                                  return null;
+                                }),
                           ),
                           Container(
                             padding: EdgeInsets.fromLTRB(40, 8, 16, 0),
