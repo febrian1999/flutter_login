@@ -112,6 +112,7 @@ class _RegisterState extends State<Register> {
                       child: Column(
                         children: [
                           Container(
+                            width: double.infinity,
                             padding: EdgeInsets.fromLTRB(40, 8, 16, 0),
                             child: Text(
                               "Username",
