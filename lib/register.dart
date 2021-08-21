@@ -179,6 +179,7 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                           Container(
+                            width: double.infinity,
                             padding: EdgeInsets.fromLTRB(40, 8, 16, 0),
                             child: Text(
                               "Password",
@@ -225,6 +226,7 @@ class _RegisterState extends State<Register> {
                                 }),
                           ),
                           Container(
+                            width: double.infinity,
                             padding: EdgeInsets.fromLTRB(40, 8, 16, 0),
                             child: Text(
                               "Re Type Password",
