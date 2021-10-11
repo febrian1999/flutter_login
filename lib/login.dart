@@ -12,24 +12,28 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final formGlobalKey = GlobalKey<FormState>();
+
   TextEditingController controllerUser = TextEditingController();
   TextEditingController controllerPass = TextEditingController();
 
   loginOnPressed() {
-    final firestoreInstance = FirebaseFirestore.instance;
+    if (formGlobalKey.currentState!.validate()) {
+      final firestoreInstance = FirebaseFirestore.instance;
 
-    String username = controllerUser.text;
-    String password = controllerPass.text;
-    String hashpass;
+      String username = controllerUser.text;
+      String password = controllerPass.text;
+      String hashpass;
 
-    firestoreInstance.collection('users').doc(username).get().then(
-      (value) {
-        hashpass = value.data()?['password'];
-        if (md5Hash(password) == hashpass) {
-          goToHomePage(context);
-        }
-      },
-    );
+      firestoreInstance.collection('users').doc(username).get().then(
+        (value) {
+          hashpass = value.data()?['password'];
+          if (md5Hash(password) == hashpass) {
+            goToHomePage(context);
+          }
+        },
+      );
+    }
   }
 
   registerOnPressed() {
@@ -106,6 +110,12 @@ class _LoginState extends State<Login> {
                         style: TextStyle(
                           color: Colors.white,
                         ),
+                        validator: (username) {
+                          if (username == null || username.isEmpty) {
+                            return 'Username is empty';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                     Container(
