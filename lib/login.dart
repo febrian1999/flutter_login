@@ -159,6 +159,12 @@ class _LoginState extends State<Login> {
                           style: TextStyle(
                             color: Colors.white,
                           ),
+                          validator: (password) {
+                            if (password == null || password.isEmpty) {
+                              return 'Password is empty';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       Container(
