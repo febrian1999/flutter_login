@@ -279,8 +279,8 @@ class _RegisterState extends State<Register> {
                               style: TextStyle(
                                 color: Colors.white,
                               ),
-                              validator: (value) {
-                                String pass1 = controllerPass1.text;
+                              validator: (pass1) {
+                                // String pass1 = controllerPass1.text;
                                 String pass2 = controllerPass2.text;
                                 if (pass1 != pass2) {
                                   return "Password doesn't match";
