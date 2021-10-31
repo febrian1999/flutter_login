@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="febrian.flutter_login">
    <application
-        android:label="flutter_login"
+        android:label="Flutter Login"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
