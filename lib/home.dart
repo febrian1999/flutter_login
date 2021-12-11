@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login/library.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key, required this.title}) : super(key: key);
@@ -10,6 +11,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  loginOnPressed() {
+    goToLoginPage(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
