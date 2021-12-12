@@ -31,19 +31,24 @@ class _HomeState extends State<Home> {
           ),
         ),
         child: SafeArea(
-          child: Container(
-            alignment: Alignment.center,
-            width: double.infinity,
-            height: double.infinity,
-            child: Text(
-              "Hello World!",
-              style: TextStyle(
-                color: Colors.black54,
-                fontSize: 48,
-                fontWeight: FontWeight.bold,
+          child: Column(
+            children: [
+              Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: double.infinity,
+                child: Text(
+                  "Hello World!",
+                  style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
-              textAlign: TextAlign.center,
-            ),
+              Container(),
+            ],
           ),
         ),
       ),
