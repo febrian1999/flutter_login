@@ -47,7 +47,12 @@ class _HomeState extends State<Home> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Container(),
+              Container(
+                child: TextButton(
+                  onPressed: goToLoginPage(context),
+                  child: Text("Logout"),
+                ),
+              ),
             ],
           ),
         ),
