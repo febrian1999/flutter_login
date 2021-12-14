@@ -48,6 +48,8 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
+                alignment: Alignment.center,
+                width: double.infinity,
                 child: TextButton(
                   onPressed: goToLoginPage(context),
                   child: Text("Logout"),
