@@ -11,7 +11,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  loginOnPressed() {
+  logoutOnPressed() {
     goToLoginPage(context);
   }
 
@@ -48,13 +48,19 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: goToLoginPage(context),
+                child: ElevatedButton(
+                  onPressed: logoutOnPressed(),
                   child: Text("Logout"),
                 ),
               ),
+              // Container(
+              //   alignment: Alignment.center,
+              //   width: double.infinity,
+              //   child: TextButton(
+              //     onPressed: goToLoginPage(context),
+              //     child: Text("Logout"),
+              //   ),
+              // ),
             ],
           ),
         ),
