@@ -7,7 +7,7 @@ import 'home.dart';
 import 'login.dart';
 
 goToHomePage(context) {
-  Navigator.pushReplacement(
+  Navigator.push(
     context,
     MaterialPageRoute(
       builder: (context) => Home(
