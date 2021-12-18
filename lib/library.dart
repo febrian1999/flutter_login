@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/register.dart';
-
-import 'home.dart';
+import 'package:flutter_login/home.dart';
 import 'login.dart';
 
 goToHomePage(context) {
