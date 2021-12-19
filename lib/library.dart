@@ -3,10 +3,10 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/register.dart';
 import 'package:flutter_login/home.dart';
-import 'login.dart';
+import 'package:flutter_login/login.dart';
 
 goToHomePage(context) {
-  Navigator.push(
+  Navigator.pushReplacement(
     context,
     MaterialPageRoute(
       builder: (context) => Home(
