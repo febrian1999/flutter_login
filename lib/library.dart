@@ -9,7 +9,7 @@ goToHomePage(context) {
   Navigator.pushReplacement(
     context,
     MaterialPageRoute(
-      builder: (context) => Home(
+      builder: (BuildContext context) => Home(
         title: 'Home',
       ),
     ),
