@@ -20,7 +20,7 @@ goToLoginPage(context) {
   Navigator.pushReplacement(
     context,
     MaterialPageRoute(
-      builder: (context) => Login(
+      builder: (BuildContext context) => Login(
         title: 'Login',
       ),
     ),
