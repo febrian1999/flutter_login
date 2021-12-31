@@ -31,7 +31,7 @@ goToRegisterPage(context) {
   Navigator.pushReplacement(
     context,
     MaterialPageRoute(
-      builder: (context) => Register(
+      builder: (BuildContext context) => Register(
         title: 'Register',
       ),
     ),
