@@ -18,21 +18,25 @@ class _LoginState extends State<Login> {
   TextEditingController controllerPass = TextEditingController();
 
   loginOnPressed() {
-    if (formGlobalKey.currentState!.validate()) {
-      final firestoreInstance = FirebaseFirestore.instance;
+    try {
+      if (formGlobalKey.currentState!.validate()) {
+        final firestoreInstance = FirebaseFirestore.instance;
 
-      String username = controllerUser.text;
-      String password = controllerPass.text;
-      String hashpass;
+        String username = controllerUser.text;
+        String password = controllerPass.text;
+        String hashpass;
 
-      firestoreInstance.collection('users').doc(username).get().then(
-        (value) {
-          hashpass = value.data()?['password'];
-          if (md5Hash(password) == hashpass) {
-            goToHomePage(context);
-          }
-        },
-      );
+        firestoreInstance.collection('users').doc(username).get().then(
+          (value) {
+            hashpass = value.data()?['password'];
+            if (md5Hash(password) == hashpass) {
+              goToHomePage(context);
+            }
+          },
+        );
+      }
+    } on Exception catch (e) {
+      print(e);
     }
   }
 
