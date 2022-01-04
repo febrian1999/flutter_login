@@ -6,14 +6,18 @@ import 'package:flutter_login/home.dart';
 import 'package:flutter_login/login.dart';
 
 goToHomePage(context) {
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(
-      builder: (BuildContext context) => Home(
-        title: 'Home',
+  try {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => Home(
+          title: 'Home',
+        ),
       ),
-    ),
-  );
+    );
+  } on Exception catch (e) {
+    print(e);
+  }
 }
 
 goToLoginPage(context) {
