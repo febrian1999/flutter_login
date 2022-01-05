@@ -21,14 +21,18 @@ goToHomePage(context) {
 }
 
 goToLoginPage(context) {
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(
-      builder: (BuildContext context) => Login(
-        title: 'Login',
+  try {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => Login(
+          title: 'Login',
+        ),
       ),
-    ),
-  );
+    );
+  } on Exception catch (e) {
+    print(e);
+  }
 }
 
 goToRegisterPage(context) {
