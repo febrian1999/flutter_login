@@ -11,9 +11,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  logoutOnPressed() {
-    goToLoginPage(context);
-  }
+  // logoutOnPressed() {
+  //   goToLoginPage(context);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
               ),
               Container(
                 child: ElevatedButton(
-                  onPressed: logoutOnPressed(),
+                  onPressed: () {}, //logoutOnPressed(),
                   child: Text("Logout"),
                 ),
               ),
