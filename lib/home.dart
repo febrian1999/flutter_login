@@ -47,12 +47,13 @@ class _HomeState extends State<Home> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Container(
-                child: ElevatedButton(
-                  onPressed: () {}, //logoutOnPressed(),
-                  child: Text("Logout"),
-                ),
-              ),
+              // Container(
+              //   child: ElevatedButton(
+              //     onPressed: logoutOnPressed(),
+              //     child: Text("Logout"),
+              //   ),
+              // ),
+
               // Container(
               //   alignment: Alignment.center,
               //   width: double.infinity,
