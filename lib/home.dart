@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   logoutOnPressed() {
-    // goToLoginPage(context);
+    goToLoginPage(context);
   }
 
   @override
@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
               Container(
                 alignment: Alignment.center,
                 width: double.infinity,
-                height: double.infinity,
+                // height: double.infinity,
                 child: Text(
                   "Hello World!",
                   style: TextStyle(
@@ -48,19 +48,34 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
+                padding: EdgeInsets.all(16),
                 child: ElevatedButton(
-                  onPressed: logoutOnPressed(),
-                  child: Text("Logout"),
+                  onPressed: () {
+                    logoutOnPressed();
+                  },
+                  child: Text(
+                    "Logout",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.black45,
+                    minimumSize: Size.fromHeight(48),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                  ),
                 ),
               ),
-              Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: logoutOnPressed(),
-                  child: Text("Logout"),
-                ),
-              ),
+              // Container(
+              //   alignment: Alignment.center,
+              //   width: double.infinity,
+              //   child: TextButton(
+              //     onPressed: logoutOnPressed(),
+              //     child: Text("Logout"),
+              //   ),
+              // ),
             ],
           ),
         ),
