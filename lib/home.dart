@@ -68,14 +68,6 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              // Container(
-              //   alignment: Alignment.center,
-              //   width: double.infinity,
-              //   child: TextButton(
-              //     onPressed: logoutOnPressed(),
-              //     child: Text("Logout"),
-              //   ),
-              // ),
             ],
           ),
         ),
